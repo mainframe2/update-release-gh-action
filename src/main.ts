@@ -15,6 +15,9 @@ async function run(): Promise<void> {
     const github = getOctokit(process.env.GITHUB_TOKEN);
     const { owner, repo } = context.repo;
 
+    // eslint-disable-next-line no-console
+    console.log(`Try to get release for: ${tag}`);
+
     const { data } = await github.repos.getReleaseByTag({ owner, repo, tag });
     // eslint-disable-next-line no-console
     console.log(`Release data: ${JSON.stringify(data)}`);
