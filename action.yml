@@ -1,11 +1,16 @@
-name: 'Your name here'
-description: 'Provide a description here'
+name: 'Update github release'
+description: 'Updates a Github release with the given tag'
 author: 'Your name or organization here'
 inputs:
-  milliseconds: # change this
+  tag:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'The tag of the release to be updated'
+  body:
+    required: false
+    description: 'The body to update the release with'
+  name:
+    required: false
+    description: 'The name to update the release with'
 runs:
   using: 'node12'
   main: 'dist/index.js'

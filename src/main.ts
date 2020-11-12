@@ -1,19 +1,28 @@
-import * as core from '@actions/core'
-import {wait} from './wait'
+import * as core from '@actions/core';
+import { getOctokit, context } from '@actions/github';
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
+    if (!process.env.GITHUB_TOKEN) {
+      throw new Error('GITHUB_TOKEN env variable not set.');
+    }
+    const tag = core.getInput('tag');
+    const body = core.getInput('body');
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    const github = getOctokit(process.env.GITHUB_TOKEN);
+    const { owner, repo } = context.repo;
 
-    core.setOutput('time', new Date().toTimeString())
+    const { data } = await github.repos.getReleaseByTag({ owner, repo, tag });
+
+    github.repos.updateRelease({
+      owner,
+      repo,
+      release_id: data.id,
+      body
+    });
   } catch (error) {
-    core.setFailed(error.message)
+    core.setFailed(error.message);
   }
 }
 
-run()
+run();
