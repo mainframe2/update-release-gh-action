@@ -1439,11 +1439,7 @@ function run() {
             const name = core.getInput('name');
             const github = github_1.getOctokit(process.env.GITHUB_TOKEN);
             const { owner, repo } = github_1.context.repo;
-            // eslint-disable-next-line no-console
-            console.log(`Try to get release for: ${tag}`);
             const { data } = yield github.repos.getReleaseByTag({ owner, repo, tag });
-            // eslint-disable-next-line no-console
-            console.log(`Release data: ${JSON.stringify(data)}`);
             const bodyFileContent = bodyFilePath
                 ? yield fs_1.promises.readFile(bodyFilePath, 'utf8')
                 : '';
@@ -1451,10 +1447,7 @@ function run() {
                 owner,
                 repo,
                 release_id: data.id,
-                body: `
-        ${body}
-        ${bodyFileContent}
-        `,
+                body: `${body}${bodyFileContent}`,
                 name
             });
         }
