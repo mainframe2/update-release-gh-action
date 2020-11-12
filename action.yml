@@ -8,6 +8,9 @@ inputs:
   body:
     required: false
     description: 'The body to update the release with'
+  body_file_path:
+    required: false
+    description: 'Add the contents of the file on the given path to the release body'
   name:
     required: false
     description: 'The name to update the release with'
