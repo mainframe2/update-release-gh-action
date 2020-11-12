@@ -1422,12 +1422,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(186));
-const promises_1 = __importDefault(__webpack_require__(865));
+const fs_1 = __webpack_require__(747);
 const github_1 = __webpack_require__(438);
 function run() {
     var _a;
@@ -1444,7 +1441,7 @@ function run() {
             const { owner, repo } = github_1.context.repo;
             const { data } = yield github.repos.getReleaseByTag({ owner, repo, tag });
             const bodyFileContent = bodyFilePath
-                ? yield promises_1.default.readFile(bodyFilePath, 'utf8')
+                ? yield fs_1.promises.readFile(bodyFilePath, 'utf8')
                 : '';
             github.repos.updateRelease({
                 owner,
@@ -5388,14 +5385,6 @@ function removeHook (state, name, method) {
 /***/ (function(module) {
 
 module.exports = require("url");
-
-/***/ }),
-
-/***/ 865:
-/***/ (function(module) {
-
-module.exports = eval("require")("fs/promises");
-
 
 /***/ }),
 
