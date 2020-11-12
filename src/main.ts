@@ -16,8 +16,8 @@ async function run(): Promise<void> {
     const { owner, repo } = context.repo;
 
     const { data } = await github.repos.getReleaseByTag({ owner, repo, tag });
-
-    core.debug(JSON.stringify(data));
+    // eslint-disable-next-line no-console
+    console.log(`Release data: ${JSON.stringify(data)}`);
     const bodyFileContent = bodyFilePath
       ? await fs.readFile(bodyFilePath, 'utf8')
       : '';
