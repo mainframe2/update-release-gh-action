@@ -1440,6 +1440,7 @@ function run() {
             const github = github_1.getOctokit(process.env.GITHUB_TOKEN);
             const { owner, repo } = github_1.context.repo;
             const { data } = yield github.repos.getReleaseByTag({ owner, repo, tag });
+            core.debug(JSON.stringify(data));
             const bodyFileContent = bodyFilePath
                 ? yield fs_1.promises.readFile(bodyFilePath, 'utf8')
                 : '';

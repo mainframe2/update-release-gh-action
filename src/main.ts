@@ -17,6 +17,7 @@ async function run(): Promise<void> {
 
     const { data } = await github.repos.getReleaseByTag({ owner, repo, tag });
 
+    core.debug(JSON.stringify(data));
     const bodyFileContent = bodyFilePath
       ? await fs.readFile(bodyFilePath, 'utf8')
       : '';
