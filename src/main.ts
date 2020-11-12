@@ -8,6 +8,7 @@ async function run(): Promise<void> {
     }
     const tag = core.getInput('tag');
     const body = core.getInput('body');
+    const name = core.getInput('name');
 
     const github = getOctokit(process.env.GITHUB_TOKEN);
     const { owner, repo } = context.repo;
@@ -18,7 +19,8 @@ async function run(): Promise<void> {
       owner,
       repo,
       release_id: data.id,
-      body
+      body,
+      name
     });
   } catch (error) {
     core.setFailed(error.message);

@@ -1433,6 +1433,7 @@ function run() {
             }
             const tag = core.getInput('tag');
             const body = core.getInput('body');
+            const name = core.getInput('name');
             const github = github_1.getOctokit(process.env.GITHUB_TOKEN);
             const { owner, repo } = github_1.context.repo;
             const { data } = yield github.repos.getReleaseByTag({ owner, repo, tag });
@@ -1440,7 +1441,8 @@ function run() {
                 owner,
                 repo,
                 release_id: data.id,
-                body
+                body,
+                name
             });
         }
         catch (error) {
