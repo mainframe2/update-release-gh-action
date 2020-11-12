@@ -8,7 +8,7 @@ async function run(): Promise<void> {
       throw new Error('GITHUB_TOKEN env variable not set.');
     }
     const tag = core.getInput('tag');
-    const body = core.getInput('body');
+    const body = core.getInput('body') ?? '';
     const bodyFilePath = core.getInput('body_file_path');
     const name = core.getInput('name');
 

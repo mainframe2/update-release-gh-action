@@ -1430,13 +1430,14 @@ const core = __importStar(__webpack_require__(186));
 const promises_1 = __importDefault(__webpack_require__(865));
 const github_1 = __webpack_require__(438);
 function run() {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
         try {
             if (!process.env.GITHUB_TOKEN) {
                 throw new Error('GITHUB_TOKEN env variable not set.');
             }
             const tag = core.getInput('tag');
-            const body = core.getInput('body');
+            const body = (_a = core.getInput('body')) !== null && _a !== void 0 ? _a : '';
             const bodyFilePath = core.getInput('body_file_path');
             const name = core.getInput('name');
             const github = github_1.getOctokit(process.env.GITHUB_TOKEN);
